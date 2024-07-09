@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
+package innovationlabs;
 
 import Conexion.CrearConexion;
 import java.awt.Color;
@@ -73,7 +73,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         logo.setBackground(new java.awt.Color(255, 255, 255));
         logo.setForeground(new java.awt.Color(255, 255, 255));
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2024-06-22 at 12.41.08 PM.jpeg"))); // NOI18N
         BG.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 430, 320));
 
         LabelTtulo.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
@@ -299,8 +298,8 @@ public class FrmLogin extends javax.swing.JFrame {
         contador++;
     }
     if (contador > 0) {
-        FrmPrincipal frmPrincipal = new FrmPrincipal();
-        frmPrincipal.setVisible(true);
+        FrmDashboard frmDashboard = new FrmDashboard();
+        frmDashboard.setVisible(true);
         this.dispose();
     }
 } catch (SQLException ex) {
@@ -347,6 +346,8 @@ public class FrmLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
