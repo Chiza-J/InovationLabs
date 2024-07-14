@@ -4,7 +4,14 @@
  */
 package views;
 
+import Impl.DAOProveedoresImpl;
+
+import innovationlabs.FrmDashboard;
+import interfaces.DAOProveedor;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.Proveedor;
 
 /**
  *
@@ -18,25 +25,24 @@ public class PanProveedores extends javax.swing.JPanel {
     public PanProveedores() {
         initComponents();
         InitStyles();
+        LoadUsers();
     }
     
     private void InitStyles(){
-        bienvenido.putClientProperty("FlatLaf.style", "font: bold $h1.regular.font");
-        bienvenido.setForeground(Color.BLACK);
-        introduccion.putClientProperty("FlatLaf.style", "font: bold $h3.regular.font");
-        introduccion.setForeground(Color.BLACK);
-        opciones.putClientProperty("FlatLaf.styleClass", "large");
-        opciones.setForeground(Color.BLACK);
-        opciones2.putClientProperty("FlatLaf.styleClass", "large");
-        opciones2.setForeground(Color.BLACK);
-        opciones3.putClientProperty("FlatLaf.styleClass", "large");
-        opciones3.setForeground(Color.BLACK);
-        opciones4.putClientProperty("FlatLaf.styleClass", "large");
-        opciones4.setForeground(Color.BLACK);
-        opciones5.putClientProperty("FlatLaf.styleClass", "large");
-        opciones5.setForeground(Color.BLACK);
+        
+        
     }
-
+    
+    private void LoadUsers(){
+        try {
+            DAOProveedor dao = new DAOProveedoresImpl();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getIdProveedor(), u.getNombreEmpresa(), u.getTelefono(), u.getCatalogoProductos()}));
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,111 +54,205 @@ public class PanProveedores extends javax.swing.JPanel {
 
         bg = new javax.swing.JPanel();
         bienvenido = new javax.swing.JLabel();
-        introduccion = new javax.swing.JLabel();
-        opciones = new javax.swing.JLabel();
-        opciones2 = new javax.swing.JLabel();
-        opciones3 = new javax.swing.JLabel();
-        opciones4 = new javax.swing.JLabel();
-        opciones5 = new javax.swing.JLabel();
+        btnCrear = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(225, 225, 225));
         setPreferredSize(new java.awt.Dimension(1020, 598));
 
         bg.setBackground(new java.awt.Color(225, 225, 225));
-        bg.setPreferredSize(new java.awt.Dimension(750, 430));
+        bg.setMinimumSize(new java.awt.Dimension(1020, 598));
+        bg.setPreferredSize(new java.awt.Dimension(1020, 598));
 
         bienvenido.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         bienvenido.setText("Proveedores");
 
-        introduccion.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        introduccion.setText("Sistema de gestion de Inovation Labs");
+        btnCrear.setBackground(new java.awt.Color(153, 153, 153));
+        btnCrear.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
+        btnCrear.setText("Crear");
+        btnCrear.setBorderPainted(false);
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
-        opciones.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        opciones.setText("- Control de Usuarios");
+        btnModificar.setBackground(new java.awt.Color(153, 153, 153));
+        btnModificar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificar.setText("Modificar");
+        btnModificar.setBorderPainted(false);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
-        opciones2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        opciones2.setText("- Administrar las ventas");
+        btnEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
-        opciones3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        opciones3.setText("- Informacion del cliente");
+        btnBuscar.setBackground(new java.awt.Color(153, 153, 153));
+        btnBuscar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        opciones4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        opciones4.setText("- Informacion de proveedores");
+        jTable2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        opciones5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        opciones5.setText("- Existencia en stock");
+            },
+            new String [] {
+                "ID", "Nombre Empresa", "Telefono", "Catalogo de productos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(bienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(653, 653, 653))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(introduccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(506, 506, 506))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(678, 678, 678))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(opciones2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(661, 661, 661))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(opciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(660, 660, 660))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(opciones4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(626, 626, 626))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(opciones5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(682, 682, 682))))
+                .addGap(12, 12, 12)
+                .addComponent(bienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(bienvenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
-                .addComponent(introduccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(40, 40, 40)
-                .addComponent(opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(opciones2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(opciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(opciones4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(opciones5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(125, 125, 125))
+            .addGroup(bgLayout.createSequentialGroup()
+                .addComponent(bienvenido)
+                .addGap(11, 11, 11)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        FrmDashboard.ShowJPanel(new PanUPProveedores());
+    }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        DAOProveedor dao = new DAOProveedoresImpl();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        for (int i : jTable2.getSelectedRows()){
+            try{
+                dao.eliminar((int) jTable2.getValueAt(i, 0));
+                model.removeRow(i);
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        if(jTable2.getSelectedRow() > -1){
+            try{
+            int proveedorId = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+            DAOProveedor dao = new DAOProveedoresImpl();
+            
+            FrmDashboard.ShowJPanel(new PanUPProveedores(dao.getUserById(proveedorId)));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        } else{
+            //alerta
+        }
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            String proveedorBuscar = txtBuscar.getText();
+            
+            DAOProveedor dao = new DAOProveedoresImpl();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.setRowCount(0);
+            dao.listar(proveedorBuscar).forEach((u) -> model.addRow(new Object[]{u.getIdProveedor(), u.getNombreEmpresa(), u.getTelefono(), u.getCatalogoProductos()}));
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JLabel bienvenido;
-    private javax.swing.JLabel introduccion;
-    private javax.swing.JLabel opciones;
-    private javax.swing.JLabel opciones2;
-    private javax.swing.JLabel opciones3;
-    private javax.swing.JLabel opciones4;
-    private javax.swing.JLabel opciones5;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

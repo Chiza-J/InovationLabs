@@ -4,25 +4,25 @@
  */
 package views;
 
-import Impl.DAOClientessImpl;
+import Impl.DAOProductosImpl;
 
 import innovationlabs.FrmDashboard;
-import interfaces.DAOCliente;
+import interfaces.DAOProducto;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.Cliente;
+import models.Producto;
 
 /**
  *
  * @author User
  */
-public class PanClientes extends javax.swing.JPanel {
+public class PanProductos extends javax.swing.JPanel {
 
     /**
      * Creates new form PanPrincipal
      */
-    public PanClientes() {
+    public PanProductos() {
         initComponents();
         InitStyles();
         LoadUsers();
@@ -35,9 +35,9 @@ public class PanClientes extends javax.swing.JPanel {
     
     private void LoadUsers(){
         try {
-            DAOCliente dao = new DAOClientessImpl();
+            DAOProducto dao = new DAOProductosImpl();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getIdCliente(), u.getNombre(), u.getApellido(), u.getTelefono(), u.getDireccion(), u.getCorreloElectronico(), u.getNit()}));
+            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getIdProducto(), u.getNombre(), u.getPrecioUnitario(), u.getCodigoProducto(), u.getIdProveedor()}));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -70,7 +70,7 @@ public class PanClientes extends javax.swing.JPanel {
         bg.setPreferredSize(new java.awt.Dimension(1020, 598));
 
         bienvenido.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
-        bienvenido.setText("Clientes");
+        bienvenido.setText("Productos");
 
         btnCrear.setBackground(new java.awt.Color(153, 153, 153));
         btnCrear.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
@@ -122,15 +122,22 @@ public class PanClientes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Nombre", "Apellido", "Telefono", "Dirreccion", "Correo", "NIT"
+                "ID", "Nombre", "Precio Unitario", "Codigo de Producto", "ID Proveedor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -195,11 +202,11 @@ public class PanClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        FrmDashboard.ShowJPanel(new PanUPClientes());
+        FrmDashboard.ShowJPanel(new PanUPProductos());
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        DAOCliente dao = new DAOClientessImpl();
+        DAOProducto dao = new DAOProductosImpl();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         for (int i : jTable2.getSelectedRows()){
             try{
@@ -216,10 +223,10 @@ public class PanClientes extends javax.swing.JPanel {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         if(jTable2.getSelectedRow() > -1){
             try{
-            int clienteId = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
-            DAOCliente dao = new DAOClientessImpl();
+            int productoId = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+            DAOProducto dao = new DAOProductosImpl();
             
-            FrmDashboard.ShowJPanel(new PanUPClientes(dao.getUserById(clienteId)));
+            FrmDashboard.ShowJPanel(new PanUPProductos(dao.getUserById(productoId)));
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -231,12 +238,12 @@ public class PanClientes extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-            String clienteBuscar = txtBuscar.getText();
+            String productoBuscar = txtBuscar.getText();
             
-            DAOCliente dao = new DAOClientessImpl();
+            DAOProducto dao = new DAOProductosImpl();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setRowCount(0);
-            dao.listar(clienteBuscar).forEach((u) -> model.addRow(new Object[]{u.getIdCliente(), u.getNombre(), u.getApellido(), u.getTelefono(), u.getDireccion(), u.getCorreloElectronico(), u.getNit()}));
+            dao.listar(productoBuscar).forEach((u) -> model.addRow(new Object[]{u.getIdProducto(), u.getNombre(), u.getPrecioUnitario(), u.getCodigoProducto(), u.getIdProveedor()}));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

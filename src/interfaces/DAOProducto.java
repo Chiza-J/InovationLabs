@@ -12,8 +12,9 @@ import java.util.List;
  * @author User
  */
 public interface DAOProducto {
-    public void registrar(Producto usuario) throws Exception;
-    public void modificar(Producto usuario) throws Exception;
-    public void eliminar(Producto usuario) throws Exception;
-    public List<Producto> listar() throws Exception;
+    public void registrar(Producto productos) throws Exception;
+    public void modificar(Producto productos) throws Exception;
+    public void eliminar(int productosId) throws Exception;
+    public List<Producto> listar(String name) throws Exception;
+    public Producto getUserById(int productosId) throws Exception;
 }

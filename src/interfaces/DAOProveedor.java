@@ -12,8 +12,9 @@ import java.util.List;
  * @author User
  */
 public interface DAOProveedor {
-    public void registrar(Proveedor usuario) throws Exception;
-    public void modificar(Proveedor usuario) throws Exception;
-    public void eliminar(Proveedor usuario) throws Exception;
-    public List<Proveedor> listar() throws Exception;
+    public void registrar(Proveedor proveedores) throws Exception;
+    public void modificar(Proveedor proveedores) throws Exception;
+    public void eliminar(int proveedorId) throws Exception;
+    public List<Proveedor> listar(String name) throws Exception;
+    public Proveedor getUserById(int proveedorId) throws Exception;
 }

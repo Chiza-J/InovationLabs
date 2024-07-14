@@ -73,20 +73,18 @@ public class FrmLogin extends javax.swing.JFrame {
 
         logo.setBackground(new java.awt.Color(255, 255, 255));
         logo.setForeground(new java.awt.Color(255, 255, 255));
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2024-06-22 at 12.41.08 PM.jpeg"))); // NOI18N
         BG.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 430, 320));
 
         LabelTtulo.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
-        LabelTtulo.setForeground(new java.awt.Color(0, 0, 0));
         LabelTtulo.setText("INOVATION LABS");
         BG.add(LabelTtulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         InicioLabel.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
-        InicioLabel.setForeground(new java.awt.Color(0, 0, 0));
         InicioLabel.setText("INICIAR SESION");
         BG.add(InicioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         usuarioLabel.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
-        usuarioLabel.setForeground(new java.awt.Color(0, 0, 0));
         usuarioLabel.setText("USUARIO");
         BG.add(usuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
@@ -103,7 +101,6 @@ public class FrmLogin extends javax.swing.JFrame {
         BG.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 360, 40));
 
         contrasenaLabel.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
-        contrasenaLabel.setForeground(new java.awt.Color(0, 0, 0));
         contrasenaLabel.setText("CONTRASEÑA");
         BG.add(contrasenaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
@@ -169,7 +166,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         labelX.setBackground(new java.awt.Color(102, 102, 102));
         labelX.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        labelX.setForeground(new java.awt.Color(0, 0, 0));
         labelX.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelX.setText("X");
         labelX.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

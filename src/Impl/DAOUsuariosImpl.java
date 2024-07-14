@@ -55,7 +55,7 @@ public class DAOUsuariosImpl extends CrearConexion implements DAOUsuario{
     public void modificar(Usuarios usuario) throws Exception {
         try {
         conn = createConn.getConnection();
-        qry = "UPDATE usuario SET Usuario= ?, Contraseña = ?, CorreoElectronico = ?, Nombre =?, Apellido =?, Telefono=? where idusuario = ?" ;
+        qry = "UPDATE usuario SET Usuario= ?, Contraseña = ?, CorreoElectronico = ?, Nombre =?, Apellido =?, Telefono=? WHERE idusuario = ?" ;
         ps = conn.prepareStatement(qry);
         ps.setString(1, usuario.getUsuario());
         ps.setString(2, usuario.getContrasena());
@@ -63,7 +63,7 @@ public class DAOUsuariosImpl extends CrearConexion implements DAOUsuario{
         ps.setString(4, usuario.getNombre());
         ps.setString(5, usuario.getApellido());
         ps.setString(6, usuario.getTelefono());
-        ps.setInt(7, Usuarios.getUserByID);
+        ps.setInt(7, usuario.getIdUsuario());
         ps.executeUpdate();
         ps.close();
         
@@ -92,11 +92,12 @@ public class DAOUsuariosImpl extends CrearConexion implements DAOUsuario{
     }
 
     @Override
-    public List<Usuarios> listar() throws Exception {
+    public List<Usuarios> listar(String name) throws Exception {
         List<Usuarios> lista = null;
         try {
         conn = createConn.getConnection();
-        qry = "SELECT * FROM usuario;";
+        String Query = name.isEmpty() ? "SELECT * FROM usuario;" : "SELECT * FROM usuario WHERE usuario LIKE '%"+name+"%'";
+        qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();
         rs = ps.executeQuery();

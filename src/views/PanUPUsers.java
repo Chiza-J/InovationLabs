@@ -153,8 +153,11 @@ public class PanUPUsers extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         bg.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 20, 260));
 
+        btnCrear.setBackground(new java.awt.Color(153, 153, 153));
         btnCrear.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setText("CREAR USUARIO");
+        btnCrear.setBorderPainted(false);
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCrearMouseEntered(evt);
@@ -203,13 +206,15 @@ public class PanUPUsers extends javax.swing.JPanel {
         
         //Futuras validaciones?
         
-        Usuarios usuario = new Usuarios();
+        models.Usuarios usuario = isEdition ? userEdition : new models.Usuarios();
         usuario.setUsuario(user);
         usuario.setContrasena(pass);
         usuario.setCorreoElectronico(Correo);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setTelefono(telefono);
+        
+        
         
         try {
             DAOUsuario dao = new DAOUsuariosImpl();
@@ -220,13 +225,14 @@ public class PanUPUsers extends javax.swing.JPanel {
                 dao.modificar(usuario);
             }
             
+            if(!isEdition){
             txtUsuario.setText("");
             txtContraseña.setText("");
             txtCorreo.setText("");
             txtNombre.setText("");
             txtApellido.setText("");
             txtTelefono.setText("");
-            
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

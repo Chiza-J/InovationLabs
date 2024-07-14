@@ -15,6 +15,6 @@ public interface DAOUsuario {
     public void registrar(Usuarios usuario) throws Exception;
     public void modificar(Usuarios usuario) throws Exception;
     public void eliminar(int userId) throws Exception;
-    public List<Usuarios> listar() throws Exception;
+    public List<Usuarios> listar(String name) throws Exception;
     public Usuarios getUserById(int userId) throws Exception;
 }

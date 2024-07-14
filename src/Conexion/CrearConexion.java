@@ -26,7 +26,7 @@ public class CrearConexion {
     String database  = null;
     String username = null;
     String password = null;
-    String jndi = null;
+    
     
     public CrearConexion(){
         InputStream in = null;
@@ -69,17 +69,7 @@ public class CrearConexion {
         return conn;
     }
     
-    public Connection getDSConnection(){
-        Connection conn = null;
-        try{
-            Context ctx = new InitialContext();
-            DataSource ds= (DataSource)ctx.lookup(this.jndi);
-            conn=ds.getConnection();
-        }catch(NamingException | SQLException ex){
-            ex.printStackTrace();
-        }
-        return conn;
-    }
+    
     }
     
 
