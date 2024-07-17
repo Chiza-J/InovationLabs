@@ -96,7 +96,7 @@ public class DAOUsuariosImpl extends CrearConexion implements DAOUsuario{
         List<Usuarios> lista = null;
         try {
         conn = createConn.getConnection();
-        String Query = name.isEmpty() ? "SELECT * FROM usuario;" : "SELECT * FROM usuario WHERE usuario LIKE '%"+name+"%'";
+        String Query = name.isEmpty() ? "SELECT * FROM usuario ORDER BY idUsuario ASC;" : "SELECT * FROM usuario WHERE usuario LIKE '%"+name+"%' ORDER BY idUsuario ASC";
         qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();

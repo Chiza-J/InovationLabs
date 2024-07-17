@@ -5,17 +5,12 @@
 package innovationlabs;
 
 
-import views.PanPrincipal;
-import views.PanUsers;
-import views.PanInventario;
-import views.PanProveedores;
-import views.PanVentas;
-import views.PanClientes;
+import views.*;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.awt.Color;
 import javax.swing.JPanel;
-import views.PanProductos;
+
 
 /**
  *
@@ -85,7 +80,7 @@ public class FrmDashboard extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
-        btnProductos1 = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
         header = new javax.swing.JPanel();
         navText = new javax.swing.JLabel();
         dateText = new javax.swing.JLabel();
@@ -285,30 +280,30 @@ public class FrmDashboard extends javax.swing.JFrame {
         });
         menu.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 282, 50));
 
-        btnProductos1.setBackground(new java.awt.Color(102, 102, 102));
-        btnProductos1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        btnProductos1.setForeground(new java.awt.Color(255, 255, 255));
-        btnProductos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-servicios-24.png"))); // NOI18N
-        btnProductos1.setText("Configuacion ");
-        btnProductos1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
-        btnProductos1.setBorderPainted(false);
-        btnProductos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProductos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnProductos1.setIconTextGap(10);
-        btnProductos1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnConfig.setBackground(new java.awt.Color(102, 102, 102));
+        btnConfig.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnConfig.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8-servicios-24.png"))); // NOI18N
+        btnConfig.setText("Configuacion ");
+        btnConfig.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 10, 1, 1, new java.awt.Color(0, 0, 0)));
+        btnConfig.setBorderPainted(false);
+        btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfig.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnConfig.setIconTextGap(10);
+        btnConfig.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnProductos1MouseEntered(evt);
+                btnConfigMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnProductos1MouseExited(evt);
+                btnConfigMouseExited(evt);
             }
         });
-        btnProductos1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductos1ActionPerformed(evt);
+                btnConfigActionPerformed(evt);
             }
         });
-        menu.add(btnProductos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 282, 50));
+        menu.add(btnConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 282, 50));
 
         header.setBackground(new java.awt.Color(153, 153, 153));
         header.setPreferredSize(new java.awt.Dimension(750, 150));
@@ -450,11 +445,11 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProductosMouseExited
 
     private void btnProveedoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseEntered
-        // TODO add your handling code here:
+        btnProveedores.setBackground(new Color(75,75,75));
     }//GEN-LAST:event_btnProveedoresMouseEntered
 
     private void btnProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseExited
-        // TODO add your handling code here:
+        btnProveedores.setBackground(new Color(102,102,102));
     }//GEN-LAST:event_btnProveedoresMouseExited
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
@@ -462,28 +457,28 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnInventarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventarioMouseEntered
-        // TODO add your handling code here:
+        btnInventario.setBackground(new Color(75,75,75));
     }//GEN-LAST:event_btnInventarioMouseEntered
 
     private void btnInventarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventarioMouseExited
-        // TODO add your handling code here:
+        btnInventario.setBackground(new Color(102,102,102));
     }//GEN-LAST:event_btnInventarioMouseExited
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         ShowJPanel(new PanInventario());
     }//GEN-LAST:event_btnInventarioActionPerformed
 
-    private void btnProductos1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductos1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductos1MouseEntered
+    private void btnConfigMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfigMouseEntered
+        btnConfig.setBackground(new Color(75,75,75));
+    }//GEN-LAST:event_btnConfigMouseEntered
 
-    private void btnProductos1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductos1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductos1MouseExited
+    private void btnConfigMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfigMouseExited
+        btnConfig.setBackground(new Color(102,102,102));
+    }//GEN-LAST:event_btnConfigMouseExited
 
-    private void btnProductos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProductos1ActionPerformed
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        ShowJPanel(new PanConfig());
+    }//GEN-LAST:event_btnConfigActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,10 +499,10 @@ public class FrmDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel BackGround;
     private javax.swing.JLabel aplicacionNombre;
     private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnPrincipal;
     private javax.swing.JButton btnProductos;
-    private javax.swing.JButton btnProductos1;
     private javax.swing.JButton btnProveedores;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnVentas;

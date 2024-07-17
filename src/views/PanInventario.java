@@ -4,14 +4,14 @@
  */
 package views;
 
-import Impl.DAOClientessImpl;
+import Impl.DAOInventarioImpl;
 
 import innovationlabs.FrmDashboard;
-import interfaces.DAOCliente;
+import interfaces.DAOInventario;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.Cliente;
+import models.Inventario;
 
 /**
  *
@@ -35,9 +35,9 @@ public class PanInventario extends javax.swing.JPanel {
     
     private void LoadUsers(){
         try {
-            DAOCliente dao = new DAOClientessImpl();
+            DAOInventario dao = new DAOInventarioImpl();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getIdCliente(), u.getNombre(), u.getApellido(), u.getTelefono(), u.getDireccion(), u.getCorreloElectronico(), u.getNit()}));
+            dao.listar("").forEach((u) -> model.addRow(new Object[]{u.getIdInventario(), u.getIdProducto(), u.getCantidadDisponible(), u.getFechaCaducidad()}));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -195,11 +195,11 @@ public class PanInventario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        FrmDashboard.ShowJPanel(new PanUPProductos());
+        FrmDashboard.ShowJPanel(new PanUPInventario());
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        DAOCliente dao = new DAOClientessImpl();
+        DAOInventario dao = new DAOInventarioImpl();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         for (int i : jTable2.getSelectedRows()){
             try{
@@ -216,10 +216,10 @@ public class PanInventario extends javax.swing.JPanel {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         if(jTable2.getSelectedRow() > -1){
             try{
-            int clienteId = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
-            DAOCliente dao = new DAOClientessImpl();
+            int inventarioId = (int) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+            DAOInventario dao = new DAOInventarioImpl();
             
-            FrmDashboard.ShowJPanel(new PanUPClientes(dao.getUserById(clienteId)));
+            FrmDashboard.ShowJPanel(new PanUPInventario(dao.getUserById(inventarioId)));
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
@@ -231,12 +231,12 @@ public class PanInventario extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-            String clienteBuscar = txtBuscar.getText();
+            String inventarioBuscar = txtBuscar.getText();
             
-            DAOCliente dao = new DAOClientessImpl();
+            DAOInventario dao = new DAOInventarioImpl();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setRowCount(0);
-            dao.listar(clienteBuscar).forEach((u) -> model.addRow(new Object[]{u.getIdCliente(), u.getNombre(), u.getApellido(), u.getTelefono(), u.getDireccion(), u.getCorreloElectronico(), u.getNit()}));
+            dao.listar(inventarioBuscar).forEach((u) -> model.addRow(new Object[]{u.getIdInventario(), u.getIdProducto(), u.getCantidadDisponible(), u.getFechaCaducidad()}));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

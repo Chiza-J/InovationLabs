@@ -113,7 +113,7 @@ public class DAOClientessImpl extends CrearConexion implements DAOCliente{
         List<Cliente> lista = null;
         try {
         conn = createConn.getConnection();
-        String Query = name.isEmpty() ? "SELECT * FROM cliente;" : "SELECT * FROM cliente WHERE nombre LIKE '%"+name+"%'";
+        String Query = name.isEmpty() ? "SELECT * FROM cliente ORDER BY idCliente ASC;" : "SELECT * FROM cliente WHERE nombre LIKE '%"+name+"%' ORDER BY idCliente ASC";
         qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();

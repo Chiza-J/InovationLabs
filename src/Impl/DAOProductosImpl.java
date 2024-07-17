@@ -121,7 +121,7 @@ public class DAOProductosImpl extends CrearConexion implements DAOProducto{
         List<Producto> lista = null;
         try {
         conn = createConn.getConnection();
-        String Query = name.isEmpty() ? "SELECT * FROM producto;" : "SELECT * FROM producto WHERE nombre LIKE '%"+name+"%'";
+        String Query = name.isEmpty() ? "SELECT * FROM producto ORDER BY idProducto ASC;" : "SELECT * FROM producto WHERE nombre LIKE '%"+name+"%' ORDER BY idProducto ASC";
         qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();

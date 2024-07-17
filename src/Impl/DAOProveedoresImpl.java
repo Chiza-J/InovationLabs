@@ -108,7 +108,7 @@ public class DAOProveedoresImpl extends CrearConexion implements DAOProveedor{
         List<Proveedor> lista = null;
         try {
         conn = createConn.getConnection();
-        String Query = name.isEmpty() ? "SELECT * FROM proveedor;" : "SELECT * FROM proveedor WHERE nombreempresa LIKE '%"+name+"%'";
+        String Query = name.isEmpty() ? "SELECT * FROM proveedor ORDER BY idProveedor ASC;" : "SELECT * FROM proveedor WHERE nombreempresa LIKE '%"+name+"%' ORDER BY idProveedor ASC";
         qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();

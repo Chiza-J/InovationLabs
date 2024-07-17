@@ -4,10 +4,15 @@
  */
 package views;
 
-import Impl.DAOClientessImpl;
-import interfaces.DAOCliente;
+import Impl.DAOInventarioImpl;
+import interfaces.DAOInventario;
 import java.awt.Color;
-import models.Cliente;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import models.Inventario;
 
 /**
  *
@@ -17,7 +22,7 @@ public class PanUPInventario extends javax.swing.JPanel {
 
     
     boolean isEdition = false;
-    models.Cliente clienteEdition;
+    models.Inventario inventarioEdition;
     /**
      * Creates new form PanUPUsers
      */
@@ -27,24 +32,24 @@ public class PanUPInventario extends javax.swing.JPanel {
         InitStyles();
     }
     
-    public PanUPInventario(models.Cliente clientes){
+    public PanUPInventario(models.Inventario inventarios){
         initComponents();
         isEdition= true;
-        clienteEdition = clientes;
+        inventarioEdition = inventarios;
         InitStyles();
     }
     
     private void InitStyles(){
         if(isEdition){
-            introduccion.setText("Editar Cliente");
+            introduccion.setText("Editar Inventario");
             btnCrear.setText("GUARDAR");
-            if(clienteEdition != null){
-                txtNombre.setText(clienteEdition.getNombre());
-                txtApellido.setText(clienteEdition.getApellido());
-                txtTelefono.setText(clienteEdition.getTelefono());
-                txtDirreccion.setText(clienteEdition.getDireccion());
-                txtCorreo.setText(clienteEdition.getCorreloElectronico());
-                txtNit.setText(clienteEdition.getNit());
+            if(inventarioEdition != null){
+                txtProducto.setText(String.valueOf(inventarioEdition.getIdProducto()));
+                txtCantidad.setText(String.valueOf(inventarioEdition.getCantidadDisponible()));
+                
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                txtFecha.setText(dateFormat.format(inventarioEdition.getFechaCaducidad()));
+                
             }
         } 
         
@@ -60,87 +65,51 @@ public class PanUPInventario extends javax.swing.JPanel {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        txtNit = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtCorreo = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtDirreccion = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtTelefono = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtProducto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         introduccion = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         btnCrear = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1020, 598));
 
-        txtNit.setBackground(new java.awt.Color(153, 153, 153));
-        txtNit.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtNit.setForeground(new java.awt.Color(255, 255, 255));
-        txtNit.setBorder(new javax.swing.border.MatteBorder(null));
-        txtNit.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jLabel7.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel7.setText("NIT");
-
-        txtCorreo.setBackground(new java.awt.Color(153, 153, 153));
-        txtCorreo.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setBorder(new javax.swing.border.MatteBorder(null));
-        txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jLabel6.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel6.setText("Correo Electronico");
-
-        txtDirreccion.setBackground(new java.awt.Color(153, 153, 153));
-        txtDirreccion.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtDirreccion.setForeground(new java.awt.Color(255, 255, 255));
-        txtDirreccion.setBorder(new javax.swing.border.MatteBorder(null));
-        txtDirreccion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jLabel5.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel5.setText("Dirreccion");
-
-        txtTelefono.setBackground(new java.awt.Color(153, 153, 153));
-        txtTelefono.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtTelefono.setForeground(new java.awt.Color(255, 255, 255));
-        txtTelefono.setBorder(new javax.swing.border.MatteBorder(null));
-        txtTelefono.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtFecha.setBackground(new java.awt.Color(153, 153, 153));
+        txtFecha.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.setBorder(new javax.swing.border.MatteBorder(null));
+        txtFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel4.setText("Telefono");
+        jLabel4.setText("Fecha de caducidad de lote");
 
-        txtApellido.setBackground(new java.awt.Color(153, 153, 153));
-        txtApellido.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtApellido.setForeground(new java.awt.Color(255, 255, 255));
-        txtApellido.setBorder(new javax.swing.border.MatteBorder(null));
-        txtApellido.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCantidad.setBackground(new java.awt.Color(153, 153, 153));
+        txtCantidad.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        txtCantidad.setForeground(new java.awt.Color(255, 255, 255));
+        txtCantidad.setBorder(new javax.swing.border.MatteBorder(null));
+        txtCantidad.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel2.setText("Apellido");
+        jLabel2.setText("Cantidad a Ingresar");
 
-        txtNombre.setBackground(new java.awt.Color(153, 153, 153));
-        txtNombre.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombre.setBorder(new javax.swing.border.MatteBorder(null));
-        txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtProducto.setBackground(new java.awt.Color(153, 153, 153));
+        txtProducto.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        txtProducto.setForeground(new java.awt.Color(255, 255, 255));
+        txtProducto.setBorder(new javax.swing.border.MatteBorder(null));
+        txtProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
-        jLabel1.setText("Nombre");
+        jLabel1.setText("idProducto");
 
         introduccion.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        introduccion.setText("Registrar un nuevo Cliente");
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        introduccion.setText("Registrar un ingreso a Inventario");
 
         btnCrear.setBackground(new java.awt.Color(153, 153, 153));
         btnCrear.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
-        btnCrear.setText("CREAR CLIENTE");
+        btnCrear.setText("INGRESAR INVENTARIO");
         btnCrear.setBorderPainted(false);
         btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -161,65 +130,42 @@ public class PanUPInventario extends javax.swing.JPanel {
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(introduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDirreccion, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(530, 530, 530)
-                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(530, 530, 530)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(introduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(228, 228, 228)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(124, 124, 124))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(introduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(13, 13, 13)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel2)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel4)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel5)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtDirreccion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel6)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel7)
-                        .addGap(3, 3, 3)
-                        .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(13, 13, 13)
+                .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(3, 3, 3)
+                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4)
+                .addGap(3, 3, 3)
+                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -241,51 +187,59 @@ public class PanUPInventario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCrearMouseEntered
 
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
-        btnCrear.setBackground(new Color(240,240,240));
+        btnCrear.setBackground(new Color(153,153,153));
         btnCrear.setForeground(Color.black);
     }//GEN-LAST:event_btnCrearMouseExited
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         //Se convierten en variables los txt
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String telefono = txtTelefono.getText();
-        String direc = txtDirreccion.getText();
-        String correo = txtCorreo.getText();
-        String nit = txtNit.getText();
-        
-        //Futuras validaciones?
-        
-        models.Cliente clientes = isEdition ? clienteEdition : new models.Cliente();
-        clientes.setNombre(nombre);
-        clientes.setApellido(apellido);
-        clientes.setTelefono(telefono);
-        clientes.setDireccion(direc);
-        clientes.setCorreloElectronico(correo);
-        clientes.setNit(nit);
-        
-        
-        
-        try {
-            DAOCliente dao = new DAOClientessImpl();
-            if(!isEdition){
-                dao.registrar(clientes);
-            }
-            else{
-                dao.modificar(clientes);
-            }
-            
-            if(!isEdition){
-            txtNombre.setText("");
-            txtApellido.setText("");
-            txtTelefono.setText("");
-            txtDirreccion.setText("");
-            txtCorreo.setText("");
-            txtNit.setText("");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        int producto;
+    try {
+        producto = Integer.parseInt(txtProducto.getText());
+    } catch (NumberFormatException e) {
+        System.out.println("Error: El campo Producto debe ser un número.");
+        return;
+    }
+
+    int cantidad;
+    try {
+        cantidad = Integer.parseInt(txtCantidad.getText());
+    } catch (NumberFormatException e) {
+        System.out.println("Error: El campo Cantidad debe ser un número.");
+        return;
+    }
+
+    Date fecha;
+    try {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsedDate = dateFormat.parse(txtFecha.getText());
+        fecha = new Date(parsedDate.getTime()); 
+    } catch (ParseException e) {
+        System.out.println("Error: La fecha debe tener el formato yyyy-MM-dd.");
+        return;
+    }
+
+    models.Inventario inventarios = isEdition ? inventarioEdition : new models.Inventario();
+    inventarios.setIdProducto(producto);
+    inventarios.setCantidadDisponible(cantidad);
+    inventarios.setFechaCaducidad(fecha);
+
+    try {
+        DAOInventario dao = new DAOInventarioImpl();
+        if (!isEdition) {
+            dao.registrar(inventarios);
+        } else {
+            dao.modificar(inventarios);
         }
+
+        if (!isEdition) {
+            txtProducto.setText("");
+            txtCantidad.setText("");
+            txtFecha.setText("");
+        }
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
     }//GEN-LAST:event_btnCrearActionPerformed
 
 
@@ -296,15 +250,8 @@ public class PanUPInventario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDirreccion;
-    private javax.swing.JTextField txtNit;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 }

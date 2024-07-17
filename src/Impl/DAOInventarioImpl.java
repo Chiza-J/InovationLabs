@@ -109,7 +109,7 @@ public class DAOInventarioImpl extends CrearConexion implements DAOInventario{
         List<Inventario> lista = null;
         try {
         conn = createConn.getConnection();
-        String Query = name.isEmpty() ? "SELECT * FROM inventario;" : "SELECT * FROM inventario WHERE idproducto LIKE '%"+name+"%'";
+        String Query = name.isEmpty() ? "SELECT * FROM inventario ORDER BY idInventario ASC;" : "SELECT * FROM inventario WHERE idproducto LIKE '%"+name+"%' ORDER BY idInventario ASC";
         qry = Query;
         ps = conn.prepareStatement(qry);
         lista = new ArrayList();
